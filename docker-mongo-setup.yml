@@ -1,0 +1,16 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: fynalMongoServer
+    volumes:
+      - ${HOME}/FynalMongoServer:/data/db
+      - /tmp/var/log/mongodb:/var/log/mongodb
+    networks:
+      - fynal-network
+    command: ["mongod",  "--logpath",  "/var/log/mongodb/mongo.log",  "--replSet", "rs0"]
+    restart: always
+
+networks:
+  fynal-network:
+    driver: bridge
+
